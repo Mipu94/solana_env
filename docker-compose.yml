@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  solana_env:
+    platform: linux/x86_64
+    build:
+      context: "./"
+      network: host
+    container_name: test_solana_app
+    volumes:
+      - ./solana-config:/root/.config/solana/
+      - ./src:/src
