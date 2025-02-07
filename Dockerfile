@@ -9,9 +9,6 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
 build-essential git curl wget \
 libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler
 
-RUN mkdir -p /tmp
-WORKDIR /tmp
-
 # Install rust.
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs/ | sh -s -- -y
 RUN echo "export PATH=$HOME/.cargo/bin:$PATH" >> ~/.bashrc
@@ -36,7 +33,6 @@ RUN agave-install update
 
 
 # Install NVM, NodeJS
-ENV NVM_VERSION="v0.39.5"
 ENV NODE_VERSION="18/*"
 
 RUN mkdir /usr/local/nvm
@@ -58,12 +54,5 @@ RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g ts-node"
 ENV ANCHOR_VERSION="~0.28.0"
 RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g @coral-xyz/anchor-cli@${ANCHOR_VERSION}"
 
-# RUN cargo build-sbf --force-tools-install
-
-
-
-# Clear temp files
-RUN rm -rf /tmp/*
-
-WORKDIR /workspace
+WORKDIR /src
 CMD ["tail", "-f", "/dev/null"]
