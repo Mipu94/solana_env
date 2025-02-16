@@ -12,8 +12,8 @@ deploy:
 
 .PHONY: create_wallet
 create_wallet:
-	sudo docker exec -it ${PROJECT}_app /bin/sh -c 'solana-keygen new --outfile ./solana-config/id.json --no-bip39-passphrase'
-	sudo docker exec -it ${PROJECT}_app /bin/sh -c 'solana airdrop 2 --keypair ./solana-config/id.json'
+	sudo docker exec -it ${PROJECT}_app /bin/sh -c 'solana-keygen new --outfile /root/.config/solana/id.json --no-bip39-passphrase --force'
+	sudo docker exec -it ${PROJECT}_app /bin/sh -c 'solana airdrop 2 --keypair /root/.config/solana/id.json'
 
 .PHONY: restart
 restart:

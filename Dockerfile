@@ -44,15 +44,10 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | ba
     && npm i -g yarn
 
 # Install typescript
-ENV TYPESCRIPT_VERSION="^5.2.2"
-RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g typescript@${TYPESCRIPT_VERSION}"
+RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g typescript"
 
 # Install ts-node
 RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g ts-node"
-
-# Install Anchor
-ENV ANCHOR_VERSION="~0.28.0"
-RUN /bin/bash -c "source $NVM_DIR/nvm.sh && npm i -g @coral-xyz/anchor-cli@${ANCHOR_VERSION}"
 
 WORKDIR /src
 CMD ["tail", "-f", "/dev/null"]
